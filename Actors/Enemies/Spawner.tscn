@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Actors/Enemies/EnemySpawner.gd" type="Script" id=1]
+[ext_resource path="res://Actors/Enemies/01/Enemy01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Actors/Enemies/02/Enemy02.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -108, -108, 0, 0, 0, 0, 1188, -108, 0, 0, 0, 0, 1188, 1188, 0, 0, 0, 0, -108, 1188, 0, 0, 0, 0, -108, -108 )
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+moblist = [ ExtResource( 2 ), ExtResource( 3 ) ]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -108, -108 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

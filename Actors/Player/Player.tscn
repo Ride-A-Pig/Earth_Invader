@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Actors/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://src/Spaceship.png" type="Texture" id=2]
+[ext_resource path="res://Actors/Bullet/Bullet.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.3334
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 46.6666, 18.3333 )
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 1 )
+bullet = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 3.14159
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Spaceship" type="Sprite" parent="Area2D"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 6.10352e-05, -23.3333 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -6.10352e-05, 18.3333 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_WeaponTimer_timeout"]
