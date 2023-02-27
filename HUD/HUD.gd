@@ -1,6 +1,9 @@
 extends Control
 
-onready var new_save = ResourceLoader.load(load("res://Actors/Save.gd").new().path)
+onready var p = preload("res://Actors/Save.gd")
+onready var new_save = ResourceLoader.load(p.path)
+
+#onready var new_save = ResourceLoader.load(load("res://Actors/Save.gd").new().path)
 
 
 signal startGame
